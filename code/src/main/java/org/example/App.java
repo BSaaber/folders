@@ -34,8 +34,15 @@ public class App {
 
     public boolean dfsCycleSearch(String path, ArrayList<String> cycle) {
         cycle.add(path);
-        if (cycle.size() != 1 && cycle.get(0).equals(cycle.get(cycle.size() - 1))) {
-            return true;
+        if (cycle.size() != 1) {
+            for (int i = 0; i < cycle.size() - 1; i++) {
+                if (path.equals(cycle.get(i))) {
+                    if (i > 0) {
+                        cycle.subList(0, i).clear();
+                    }
+                    return true;
+                }
+            }
         }
         for (String element :
                 dependenciesMap.get(path)) {
